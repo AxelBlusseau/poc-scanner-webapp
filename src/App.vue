@@ -1,26 +1,60 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="main">
+    <div class="first-half">
+      <ScannerComp ref="scanner" />
+    </div>
+    <div class="row">
+      <button @click="scanQrCode">Scan !</button>
+      <p>{{ res }}</p>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ScannerComp from "./components/Scanner.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    ScannerComp,
+  },
+  data() {
+    return {
+      res: "",
+    };
+  },
+  methods: {
+    scanQrCode() {
+      this.res = this.$refs.scanner.scanQRCode();
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  margin: 0;
+}
+
+.main {
+  height: 100dvh;
+}
+
+.first-half {
+  height: 50%;
+  padding: 10px;
+}
+
+.row {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  border-radius: 10px;
+  padding: 1rem;
 }
 </style>
